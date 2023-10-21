@@ -1,0 +1,22 @@
+{
+  "name": "pipeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patschwendeman/node-pipeline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patschwendeman/node-pipeline/issues"
+  },
+  "homepage": "https://github.com/patschwendeman/node-pipeline#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
