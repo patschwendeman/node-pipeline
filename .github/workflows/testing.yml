@@ -4,26 +4,31 @@ on:
   push:
     branches:
       - main  # Ändern Sie 'main' in den Hauptbranchnamen Ihrer Repository
+stages:
+ - build
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 14.x]
+- build:
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  jobs:
+    tests:
+      runs-on: ubuntu-latest
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
+      strategy:
+        matrix:
+          node-version: [16.x, 14.x]
 
-      - name: Install Dependencies
-        run: npm ci
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
 
-      - name: Run Tests
-        run: npm test
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+
+        - name: Install Dependencies
+          run: npm ci
+
+        - name: Run Tests
+          run: npm test
