@@ -28,7 +28,7 @@ jobs:
       - name: Run Tests
         run: npm test
 
-  ausgabe:
+  build:
     runs-on: ubuntu-latest
 
     steps:
