@@ -1,33 +1,55 @@
-name: Unit Tests
+name: Beispiel-Pipeline
 
 on:
   push:
     branches:
-      - main  # Ändern Sie 'main' in den Hauptbranchnamen Ihrer Repository
+      - main
+
 stages:
- - build
+  - name: Vorbereitung
+    jobs:
+      - name: Checkout-Code
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
 
-- build:
+  - name: Build
+    jobs:
+      - name: Node.js-Build
+        runs-on: ubuntu-latest
+        steps:
+          - name: Verwende Node.js 14.x
+            uses: actions/setup-node@v2
+            with:
+              node-version: 14.x
 
-  jobs:
-    tests:
-      runs-on: ubuntu-latest
+          - name: Installiere Abhängigkeiten
+            run: npm ci
 
-      strategy:
-        matrix:
-          node-version: [16.x, 14.x]
+          - name: Baue die Anwendung
+            run: npm build
 
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+  - name: Test
+    jobs:
+      - name: Unit-Tests
+        runs-on: ubuntu-latest
+        steps:
+          - name: Verwende Node.js 14.x
+            uses: actions/setup-node@v2
+            with:
+              node-version: 14.x
 
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v2
-          with:
-            node-version: ${{ matrix.node-version }}
+          - name: Installiere Abhängigkeiten
+            run: npm ci
 
-        - name: Install Dependencies
-          run: npm ci
+          - name: Führe Tests aus
+            run: npm test
 
-        - name: Run Tests
-          run: npm test
+  - name: Bereitstellung
+    jobs:
+      - name: Deployment
+        runs-on: ubuntu-latest
+        steps:
+          - name: Deployment-Schritte hier
+
