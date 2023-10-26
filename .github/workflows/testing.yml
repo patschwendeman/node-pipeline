@@ -32,5 +32,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: Ausgabe
-      run: echo "Bauen test"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Ausgabe
+        run: echo "Bauen test"
