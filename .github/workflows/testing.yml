@@ -7,7 +7,6 @@ on:
 stages:
  - build
 
-
 - build:
 
   jobs:
